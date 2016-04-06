@@ -7,6 +7,7 @@
 
 	function initGame(){
 
+		var $main = doc.querySelector('main');
 		var $cards = doc.querySelectorAll('[data-js="card"]');
 		var $inputMoves = doc.querySelector('[data-js="moves"]');
 		var $buttonReset = doc.querySelector('[data-js="reset"]');
@@ -25,6 +26,16 @@
 			card.dataset.matched = false;
 			allCards.push(card);
 		});
+
+		function randomizeGame(){
+			var getAllCards = allCards;
+			getAllCards.forEach(function(card){
+				var rand = getAllCards[Math.floor(Math.random() * getAllCards.length)];
+				$main.insertBefore(card, getAllCards[rand]);
+			});
+		}
+
+		randomizeGame();
 
 		function toogleClick(){
 			if(isIrregularMove(this)) return false;
