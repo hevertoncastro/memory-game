@@ -7,6 +7,7 @@
 
 	function initGame(){
 
+		var $main = doc.querySelector('main');
 		var $cards = doc.querySelectorAll('[data-js="card"]');
 		var $inputMoves = doc.querySelector('[data-js="moves"]');
 		var $buttonReset = doc.querySelector('[data-js="reset"]');
@@ -25,6 +26,8 @@
 			card.dataset.matched = false;
 			allCards.push(card);
 		});
+
+		randomizeGame();
 
 		function toogleClick(){
 			if(isIrregularMove(this)) return false;
@@ -98,13 +101,25 @@
 			return false;
 		}
 
+		function randomizeGame(){
+			allCards.forEach(function(card){
+				var rand = getRandomElementFromArray(allCards);
+				$main.insertBefore(card, rand);
+			});
+		}
+
+		function getRandomElementFromArray(arr){
+			return arr[Math.floor(Math.random() * arr.length)];
+		}
+
 		function resetGame(){
-			var ask = confirm('Tem certeza que deseja reiniciar o jogo?');
+			var ask = confirm('Tem certeza que deseja reiniciar o jogo?\nIsso irá mudar a posição de todas as peças!');
 			if(ask){
 				allCards.forEach(function(card){
 					card.dataset.opened = false;
 					card.dataset.matched = false;
 					removeClass(card, 'active');
+					randomizeGame();
 				});
 
 				lastCard = null;
