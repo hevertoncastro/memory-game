@@ -189,7 +189,6 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -330,8 +329,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box;
 }
@@ -450,70 +447,97 @@ body {
   font-family: 'Cambria', 'Times New Roman', serif;
 }
 
-main {
-  position: relative;
-  margin: 0 auto;
-  width: 700px;
+@media only screen and (min-width: 1px) {
+  .container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  header {
+    margin: 15px auto;
+  }
+  header button {
+    float: left;
+    border: 1px solid #000;
+    background: none;
+    padding: 3px 10px;
+    margin: 0 20px;
+  }
+  header input {
+    width: 50px;
+    border: none;
+    background: none;
+  }
+
+  .card-group {
+    position: relative;
+    float: left;
+    margin: 2px;
+    width: 150px;
+    height: 150px;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .card-group {
+    -webkit-perspective: 1000;
+            perspective: 1000;
+  }
+
+  .card {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    transition: all .2s linear;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+  }
+
+  .card-group.active .card {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 727px) {
+  .card-group.active .card img {
+    border: 1px solid #C6C6C6;
+  }
 }
 
-header {
-  width: 100%;
-  margin: 15px auto;
-  text-align: right;
+@media only screen and (min-width: 1px) {
+  .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+  }
+  .face.back {
+    display: block;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+    box-sizing: border-box;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    background-color: #e9d4b9;
+    background-image: repeating-linear-gradient(45deg, transparent 5px, rgba(11, 36, 45, 0.5) 5px, rgba(11, 36, 45, 0.5) 10px, rgba(211, 119, 111, 0) 10px, rgba(211, 119, 111, 0) 35px, rgba(211, 119, 111, 0.5) 35px, rgba(211, 119, 111, 0.5) 40px, rgba(11, 36, 45, 0.5) 40px, rgba(11, 36, 45, 0.5) 50px, rgba(11, 36, 45, 0) 50px, rgba(11, 36, 45, 0) 60px, rgba(211, 119, 111, 0.5) 60px, rgba(211, 119, 111, 0.5) 70px, rgba(247, 179, 85, 0.5) 70px, rgba(247, 179, 85, 0.5) 80px, rgba(247, 179, 85, 0) 80px, rgba(247, 179, 85, 0) 90px, rgba(211, 119, 111, 0.5) 90px, rgba(211, 119, 111, 0.5) 110px, rgba(211, 119, 111, 0) 110px, rgba(211, 119, 111, 0) 120px, rgba(11, 36, 45, 0.5) 120px, rgba(11, 36, 45, 0.5) 130px), repeating-linear-gradient(135deg, transparent 5px, rgba(11, 36, 45, 0.5) 5px, rgba(11, 36, 45, 0.5) 10px, rgba(211, 119, 111, 0) 10px, rgba(211, 119, 111, 0) 35px, rgba(211, 119, 111, 0.5) 35px, rgba(211, 119, 111, 0.5) 40px, rgba(11, 36, 45, 0.5) 40px, rgba(11, 36, 45, 0.5) 50px, rgba(11, 36, 45, 0) 50px, rgba(11, 36, 45, 0) 60px, rgba(211, 119, 111, 0.5) 60px, rgba(211, 119, 111, 0.5) 70px, rgba(247, 179, 85, 0.5) 70px, rgba(247, 179, 85, 0.5) 80px, rgba(247, 179, 85, 0) 80px, rgba(247, 179, 85, 0) 90px, rgba(211, 119, 111, 0.5) 90px, rgba(211, 119, 111, 0.5) 110px, rgba(211, 119, 111, 0) 110px, rgba(211, 119, 111, 0) 140px, rgba(11, 36, 45, 0.5) 130px, rgba(11, 36, 45, 0.5) 150px);
+  }
 }
-header button {
-  float: left;
-  margin-left: 10px;
-  border: 1px solid #000;
-  background: none;
-  padding: 3px 10px;
-}
-header input {
-  width: 50px;
-  border: none;
-  background: none;
-}
+@media only screen and (min-width: 728px) {
+  .container {
+    width: 700px;
+  }
 
-.card-group {
-  position: relative;
-  float: left;
-  margin: 10px;
-  width: 150px;
-  height: 150px;
-  z-index: 1;
-  cursor: pointer;
-}
+  .card-group {
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+  }
 
-.card-group {
-  perspective: 1000;
-}
-
-.card {
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: all .2s linear;
-  transform: rotateY(180deg);
-  box-shadow: -5px 5px 5px #aaa;
-}
-
-.card-group.active .card {
-  transform: rotateY(0deg);
-}
-
-.face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-.face.back {
-  display: block;
-  transform: rotateY(180deg);
-  box-sizing: border-box;
-  padding: 10px;
-  color: white;
-  text-align: center;
-  background-color: #e9d4b9;
-  background-image: repeating-linear-gradient(45deg, transparent 5px, rgba(11, 36, 45, 0.5) 5px, rgba(11, 36, 45, 0.5) 10px, rgba(211, 119, 111, 0) 10px, rgba(211, 119, 111, 0) 35px, rgba(211, 119, 111, 0.5) 35px, rgba(211, 119, 111, 0.5) 40px, rgba(11, 36, 45, 0.5) 40px, rgba(11, 36, 45, 0.5) 50px, rgba(11, 36, 45, 0) 50px, rgba(11, 36, 45, 0) 60px, rgba(211, 119, 111, 0.5) 60px, rgba(211, 119, 111, 0.5) 70px, rgba(247, 179, 85, 0.5) 70px, rgba(247, 179, 85, 0.5) 80px, rgba(247, 179, 85, 0) 80px, rgba(247, 179, 85, 0) 90px, rgba(211, 119, 111, 0.5) 90px, rgba(211, 119, 111, 0.5) 110px, rgba(211, 119, 111, 0) 110px, rgba(211, 119, 111, 0) 120px, rgba(11, 36, 45, 0.5) 120px, rgba(11, 36, 45, 0.5) 130px), repeating-linear-gradient(135deg, transparent 5px, rgba(11, 36, 45, 0.5) 5px, rgba(11, 36, 45, 0.5) 10px, rgba(211, 119, 111, 0) 10px, rgba(211, 119, 111, 0) 35px, rgba(211, 119, 111, 0.5) 35px, rgba(211, 119, 111, 0.5) 40px, rgba(11, 36, 45, 0.5) 40px, rgba(11, 36, 45, 0.5) 50px, rgba(11, 36, 45, 0) 50px, rgba(11, 36, 45, 0) 60px, rgba(211, 119, 111, 0.5) 60px, rgba(211, 119, 111, 0.5) 70px, rgba(247, 179, 85, 0.5) 70px, rgba(247, 179, 85, 0.5) 80px, rgba(247, 179, 85, 0) 80px, rgba(247, 179, 85, 0) 90px, rgba(211, 119, 111, 0.5) 90px, rgba(211, 119, 111, 0.5) 110px, rgba(211, 119, 111, 0) 110px, rgba(211, 119, 111, 0) 140px, rgba(11, 36, 45, 0.5) 130px, rgba(11, 36, 45, 0.5) 150px);
+  .card {
+    box-shadow: -2px 2px 3px #aaa;
+  }
 }
